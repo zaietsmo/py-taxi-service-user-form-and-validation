@@ -47,15 +47,31 @@ urlpatterns = [
     path("cars/create/", CarCreateView.as_view(), name="car-create"),
     path("cars/<int:pk>/update/", CarUpdateView.as_view(), name="car-update"),
     path("cars/<int:pk>/delete/", CarDeleteView.as_view(), name="car-delete"),
-    path("cars/<int:pk>/add-driver/", add_driver_to_car, name="car-add-driver"),
-    path("cars/<int:pk>/remove-driver/", remove_driver_from_car, name="car-remove-driver"),
+    path(
+        "cars/<int:pk>/add-driver/", add_driver_to_car, name="car-add-driver"
+    ),
+    path(
+        "cars/<int:pk>/remove-driver/",
+        remove_driver_from_car,
+        name="car-remove-driver"
+    ),
     path("drivers/", DriverListView.as_view(), name="driver-list"),
     path(
-        "drivers/<int:pk>/", DriverDetailView.as_view(), name="driver-detail"
+        "drivers/<int:pk>/",
+        DriverDetailView.as_view(),
+        name="driver-detail"
     ),
     path("drivers/create/", DriverCreateView.as_view(), name="driver-create"),
-    path("drivers/<int:pk>/delete/", DriverDeleteView.as_view(), name="driver-delete"),
-    path("drivers/<int:pk>/update-license/", DriverLicenseUpdateView.as_view(), name="driver-update-license"),
+    path(
+        "drivers/<int:pk>/delete/",
+        DriverDeleteView.as_view(),
+        name="driver-delete"
+    ),
+    path(
+        "drivers/<int:pk>/update-license/",
+        DriverLicenseUpdateView.as_view(),
+        name="driver-update-license",
+    ),
 ]
 
 app_name = "taxi"

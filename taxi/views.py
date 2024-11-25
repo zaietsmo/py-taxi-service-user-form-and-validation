@@ -96,31 +96,37 @@ class DriverDetailView(LoginRequiredMixin, generic.DetailView):
 
 class DriverCreateView(LoginRequiredMixin, CreateView):
     model = get_user_model()
-    fields = ['username', 'first_name', 'last_name', 'license_number', 'password']
-    success_url = reverse_lazy('taxi:driver-list')
+    fields = [
+        "username",
+        "first_name",
+        "last_name",
+        "license_number",
+        "password"
+    ]
+    success_url = reverse_lazy("taxi:driver-list")
 
 
 class DriverDeleteView(LoginRequiredMixin, DeleteView):
     model = get_user_model()
-    success_url = reverse_lazy('taxi:driver-list')
+    success_url = reverse_lazy("taxi:driver-list")
 
 
 class DriverLicenseUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = DriverLicenseUpdateForm
-    template_name = 'taxi/driver_license_update_form.html'
-    success_url = reverse_lazy('taxi:driver-list')
+    template_name = "taxi/driver_license_update_form.html"
+    success_url = reverse_lazy("taxi:driver-list")
 
 
 @login_required
 def add_driver_to_car(request, pk):
     car = get_object_or_404(Car, pk=pk)
     car.drivers.add(request.user)
-    return redirect('taxi:car-detail', pk=pk)
+    return redirect("taxi:car-detail", pk=pk)
 
 
 @login_required
 def remove_driver_from_car(request, pk):
     car = get_object_or_404(Car, pk=pk)
     car.drivers.remove(request.user)
-    return redirect('taxi:car-detail', pk=pk)
+    return redirect("taxi:car-detail", pk=pk)
