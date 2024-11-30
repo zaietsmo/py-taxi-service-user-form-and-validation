@@ -105,6 +105,12 @@ class DriverCreateView(LoginRequiredMixin, CreateView):
     ]
     success_url = reverse_lazy("taxi:driver-list")
 
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data["password"])
+        user.save()
+        return super().form_valid(form)
+
 
 class DriverDeleteView(LoginRequiredMixin, DeleteView):
     model = get_user_model()
